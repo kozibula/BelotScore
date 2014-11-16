@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Belot Score</string>
+    <string name="action_new_game">New Game</string>
+    <string name="button_add_score">Add Scores</string>
+    <string name="winner_message">There is a winner!</string>
+    <string name="button_new_game">New Game</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="action_about">About</string>
+    <string name="about_text">Made by Nasko Georgiev</string>
+
+</resources>
