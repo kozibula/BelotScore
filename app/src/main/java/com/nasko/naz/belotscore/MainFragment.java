@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 
 public class MainFragment extends Fragment {
 
@@ -29,14 +28,22 @@ public class MainFragment extends Fragment {
 
         newGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), GameActivity.class);
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), GameActivity.class);
                 intent.putExtra("tm1", teamMember1);
                 intent.putExtra("tm2", teamMember2);
                 intent.putExtra("tm3", teamMember3);
                 intent.putExtra("tm4", teamMember4);
                 startActivity(intent);
 
+            }
+        });
+
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), SettingsActivity.class);
+                startActivity(intent);
             }
         });
 
