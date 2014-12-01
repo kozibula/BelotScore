@@ -1,4 +1,4 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,97 +10,126 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
-    <RelativeLayout
+
+    <Button
+        android:id="@+id/add_score_button"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_shape"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:text="@string/button_add_score"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
+
+
+    <LinearLayout
+        android:id="@+id/currentHandsLinearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/hand_player_one"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_edittext"
+            android:ems="10"
+            android:gravity="start"
+            android:hint="@string/team1_hint"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:padding="12dp"
+            android:textSize="22sp"
+            android:typeface="monospace" />
+
+        <EditText
+            android:id="@+id/hand_player_two"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_edittext"
+            android:ems="10"
+            android:gravity="start"
+            android:hint="@string/team2_hint"
+            android:imeOptions="actionGo"
+            android:inputType="number"
+            android:padding="12dp"
+            android:textSize="22sp"
+            android:typeface="monospace" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/buttonLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/add_score_button"
-                android:layout_width="250dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/button_shape"
-                android:shadowColor="#000000"
-                android:shadowDx="0"
-                android:shadowDy="0"
-                android:shadowRadius="5"
-                android:text="@string/button_add_score"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/buttonLinearLayout"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:layout_gravity="left"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_marginRight="20dp"
-                android:orientation="vertical">
-
-                <EditText
-                    android:id="@+id/hand_player_one"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_edittext"
-                    android:ems="10"
-                    android:gravity="start"
-                    android:imeOptions="actionNext"
-                    android:inputType="number"
-                    android:paddingLeft="10dp"
-                    android:textSize="22sp"
-                    android:typeface="monospace" />
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/history_player_one"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textSize="22sp"
-                    android:typeface="monospace" />
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="@string/nie_text_view"
+                    android:textSize="27sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="@string/vie_text_view"
+                    android:textSize="27sp" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/hand_player_two"
-                    android:layout_width="130dp"
+                <TextView
+                    android:id="@+id/history_player_one"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_edittext"
-                    android:ems="10"
-                    android:gravity="start"
-                    android:inputType="number"
-                    android:paddingLeft="15dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="20dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textSize="22sp"
                     android:typeface="monospace" />
 
                 <TextView
                     android:id="@+id/history_player_two"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="20dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textSize="22sp"
                     android:typeface="monospace" />
             </LinearLayout>
         </LinearLayout>
-    </RelativeLayout>
-</ScrollView>
+    </ScrollView>
+</LinearLayout>
