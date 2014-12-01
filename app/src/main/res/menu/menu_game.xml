@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+    <item
+        android:id="@+id/action_new_game"
+        android:orderInCategory="50"
+        android:title="@string/action_new_game" />
+    <item
+        android:id="@+id/action_undo"
+        android:orderInCategory="70"
+        android:title="@string/action_undo" />
+    <item
+        android:id="@+id/action_register_info"
+        android:orderInCategory="99"
+        android:title="@string/action_register_info" />
+    <item
+        android:id="@+id/action_login_info"
+        android:orderInCategory="100"
+        android:title="@string/login_info" />
+    <item
+        android:id="@+id/action_about"
+        android:orderInCategory="150"
+        android:title="@string/action_about" />
+</menu>
