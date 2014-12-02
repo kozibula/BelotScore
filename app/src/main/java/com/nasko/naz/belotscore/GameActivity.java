@@ -229,14 +229,6 @@ public class GameActivity extends Activity {
             Toast aboutToast = Toast.makeText(this, getString(R.string.about_text), Toast.LENGTH_LONG);
             aboutToast.show();
         }
-        if (id == R.id.action_login_info) {
-            Toast infoToast = Toast.makeText(this, username + " " + password, Toast.LENGTH_LONG);
-            infoToast.show();
-        }
-        if (id == R.id.action_register_info) {
-            Toast infoToast = Toast.makeText(this, regUsername + " " + regPassword + " " + regRepeatPassword, Toast.LENGTH_LONG);
-            infoToast.show();
-        }
         return super.onOptionsItemSelected(item);
     }
 }
