@@ -1,6 +1,7 @@
 package com.nasko.naz.belotscore;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -15,6 +16,7 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         Intent settingsIntent = getIntent();
         team1_player1 = settingsIntent.getStringExtra("team1_player1");
@@ -31,10 +33,7 @@ public class MainActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), GameActivity.class);
-                intent.putExtra("team1_player1", team1_player1);
-                intent.putExtra("team1_player2", team1_player2);
-                intent.putExtra("team2_player1", team2_player1);
-                intent.putExtra("team2_player2", team2_player2);
+
                 startActivity(intent);
 
             }

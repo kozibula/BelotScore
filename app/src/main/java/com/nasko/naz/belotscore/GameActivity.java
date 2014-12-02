@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -31,27 +31,18 @@ public class GameActivity extends Activity {
     protected String scoreHistoryP1 = "";
     protected String scoreHistoryP2 = "";
     protected String undoScoreHistoryP1 = "", undoScoreHistoryP2 = "";
-    protected String username, password, regUsername, regPassword, regRepeatPassword;
     protected String team1_player1, team1_player2, team2_player1, team2_player2;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        Intent intent = getIntent();
-        username = intent.getStringExtra("username");
-        password = intent.getStringExtra("password");
-        regUsername = intent.getStringExtra("reg_username");
-        regPassword = intent.getStringExtra("reg_password");
-        regRepeatPassword = intent.getStringExtra("reg_repeatPassword");
-
-        Intent mainIntent = getIntent();
-        team1_player1 = mainIntent.getStringExtra("team1_player1");
-        team1_player2 = mainIntent.getStringExtra("team1_player2");
-        team2_player1 = mainIntent.getStringExtra("team2_player1");
-        team2_player2 = mainIntent.getStringExtra("team2_player2");
+        SharedPreferences playerNamesSave = getSharedPreferences(SettingsActivity.saveFileName, 0);
+        team1_player1 = (playerNamesSave.getString("team1_player1", ""));
+        team1_player2 = (playerNamesSave.getString("team1_player2", ""));
+        team2_player1 = (playerNamesSave.getString("team2_player1", ""));
+        team2_player2 = (playerNamesSave.getString("team2_player2", ""));
 
         addScoreButton = (Button) findViewById(R.id.add_score_button);
         handP1EditText = (EditText) findViewById(R.id.hand_player_one);
@@ -167,7 +158,6 @@ public class GameActivity extends Activity {
                         dialog.cancel();
                     }
                 });
-
         AlertDialog alert = builder.create();
         alert.show();
         closeKeyboard();
@@ -181,8 +171,10 @@ public class GameActivity extends Activity {
     }
 
     private void showKeyboard() {
-        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.showSoftInputFromInputMethod(getCurrentFocus().getWindowToken(), InputMethodManager.SHOW_IMPLICIT);
+        InputMethodManager inputMethodManager = (InputMethodManager)
+                getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.showSoftInputFromInputMethod(getCurrentFocus().getWindowToken(),
+                InputMethodManager.SHOW_IMPLICIT);
     }
 
     protected int calculateTotalScore(int hand, int currentTotal) {
