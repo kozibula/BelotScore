@@ -17,40 +17,27 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 public class GameActivity extends Activity {
 
     Button addScoreButton;
-    EditText handP1EditText;
-    EditText handP2EditText;
-    TextView historyP1TextView;
-    TextView historyP2TextView;
+    EditText handP1EditText, handP2EditText;
+    TextView historyP1TextView, historyP2TextView;
 
-    protected int totalScoreP1 = 0, totalScoreP2 = 0;
-    protected int undoTotalScoreP1, undoTotalScoreP2;
-    protected String scoreHistoryP1 = "";
-    protected String scoreHistoryP2 = "";
-    protected String undoScoreHistoryP1 = "", undoScoreHistoryP2 = "";
+    protected int totalScoreP1 = 0, totalScoreP2 = 0, undoTotalScoreP1, undoTotalScoreP2;
+    protected String scoreHistoryP1 = "", scoreHistoryP2 = "", undoScoreHistoryP1 = "", undoScoreHistoryP2 = "";
     protected String team1_player1, team1_player2, team2_player1, team2_player2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
-        SharedPreferences playerNamesSave = getSharedPreferences(SettingsActivity.saveFileName, 0);
-        team1_player1 = (playerNamesSave.getString("team1_player1", ""));
-        team1_player2 = (playerNamesSave.getString("team1_player2", ""));
-        team2_player1 = (playerNamesSave.getString("team2_player1", ""));
-        team2_player2 = (playerNamesSave.getString("team2_player2", ""));
+        getSharedPreferences();
 
         addScoreButton = (Button) findViewById(R.id.add_score_button);
         handP1EditText = (EditText) findViewById(R.id.hand_player_one);
         handP2EditText = (EditText) findViewById(R.id.hand_player_two);
         historyP1TextView = (TextView) findViewById(R.id.history_player_one);
         historyP2TextView = (TextView) findViewById(R.id.history_player_two);
-        historyP1TextView.setText(scoreHistoryP1);
-        historyP2TextView.setText(scoreHistoryP2);
 
         addScoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +67,14 @@ public class GameActivity extends Activity {
         });
     }
 
+    private void getSharedPreferences() {
+        SharedPreferences playerNamesSave = getSharedPreferences(SettingsActivity.saveFileName, 0);
+        team1_player1 = (playerNamesSave.getString("team1_player1", ""));
+        team1_player2 = (playerNamesSave.getString("team1_player2", ""));
+        team2_player1 = (playerNamesSave.getString("team2_player1", ""));
+        team2_player2 = (playerNamesSave.getString("team2_player2", ""));
+    }
+
     private void saveBackUp() {
         undoScoreHistoryP1 = scoreHistoryP1;
         undoScoreHistoryP2 = scoreHistoryP2;
@@ -95,8 +90,7 @@ public class GameActivity extends Activity {
 
         saveBackUp();
 
-        StringBuffer historyP1 = new StringBuffer();
-        StringBuffer historyP2 = new StringBuffer();
+        StringBuffer historyP1 = new StringBuffer(), historyP2 = new StringBuffer();
 
         if (scoreHistoryP1.matches("") && scoreHistoryP2.matches("")) {
             historyP1.append(String.valueOf(newScoreP1)).append(" + ");
@@ -117,33 +111,16 @@ public class GameActivity extends Activity {
         handP1EditText.setText("");
         handP1EditText.requestFocus();
         handP2EditText.setText("");
-        showKeyboard();
     }
 
     private boolean checkForWinner(int totalScoreP1, int totalScoreP2) {
-        if ((totalScoreP1 >= 151 || totalScoreP2 >= 151) && totalScoreP1 != totalScoreP2)
-            return true;
-        else return false;
+        return ((totalScoreP1 >= 151 || totalScoreP2 >= 151) && totalScoreP1 != totalScoreP2);
     }
 
     private void showWinnerDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        TextView winnerMessage = new TextView(this);
-        if (team1_player1 == null || team1_player1.matches("") || team1_player2 == null || team1_player2.matches("")
-                || team2_player1 == null || team2_player1.matches("") || team2_player2 == null || team2_player2.matches("")) {
-            winnerMessage.setText(R.string.winner_message);
-        } else {
-            if (totalScoreP1 > totalScoreP2) {
-                winnerMessage.setText(team1_player1 + " and " + team1_player2 + " are winners!");
-            } else {
-                winnerMessage.setText(team2_player1 + " and " + team2_player2 + " are winners!");
-            }
-        }
-        winnerMessage.setGravity(Gravity.CENTER);
-        winnerMessage.setHeight(150);
-        winnerMessage.setTextSize(16);
+        TextView winnerMessage = buildWinnerMessage();
         builder.setView(winnerMessage);
-
         builder.setCancelable(true);
         builder.setPositiveButton(R.string.button_new_game,
                 new DialogInterface.OnClickListener() {
@@ -163,6 +140,24 @@ public class GameActivity extends Activity {
         closeKeyboard();
     }
 
+    private TextView buildWinnerMessage() {
+        TextView winnerMessage = new TextView(this);
+        if (team1_player1 == null || team1_player1.matches("") || team1_player2 == null || team1_player2.matches("")
+                || team2_player1 == null || team2_player1.matches("") || team2_player2 == null || team2_player2.matches("")) {
+            winnerMessage.setText(R.string.winner_message);
+        } else {
+            if (totalScoreP1 > totalScoreP2) {
+                winnerMessage.setText(team1_player1 + " and " + team1_player2 + " are winners!");
+            } else {
+                winnerMessage.setText(team2_player1 + " and " + team2_player2 + " are winners!");
+            }
+        }
+        winnerMessage.setGravity(Gravity.CENTER);
+        winnerMessage.setHeight(150);
+        winnerMessage.setTextSize(16);
+        return winnerMessage;
+    }
+
     private void closeKeyboard() {
         InputMethodManager inputManager = (InputMethodManager)
                 getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -178,8 +173,8 @@ public class GameActivity extends Activity {
     }
 
     protected int calculateTotalScore(int hand, int currentTotal) {
-        int newTotal = hand + currentTotal;
-        return newTotal;
+        currentTotal += hand;
+        return currentTotal;
     }
 
     private void startNewGame() {
