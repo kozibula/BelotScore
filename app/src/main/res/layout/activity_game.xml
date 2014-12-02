@@ -43,7 +43,7 @@
             android:background="@drawable/rounded_edittext"
             android:ems="10"
             android:gravity="start"
-            android:hint="@string/team1_hint"
+            android:hint="@string/points_hint"
             android:imeOptions="actionNext"
             android:inputType="number"
             android:padding="12dp"
@@ -59,7 +59,7 @@
             android:background="@drawable/rounded_edittext"
             android:ems="10"
             android:gravity="start"
-            android:hint="@string/team2_hint"
+            android:hint="@string/points_hint"
             android:imeOptions="actionGo"
             android:inputType="number"
             android:padding="12dp"
@@ -69,7 +69,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/scroll_scrollview">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -99,6 +100,31 @@
                     android:gravity="center_horizontal"
                     android:text="@string/vie_text_view"
                     android:textSize="27sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/team1_wins_textview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/team2_wins_textview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout

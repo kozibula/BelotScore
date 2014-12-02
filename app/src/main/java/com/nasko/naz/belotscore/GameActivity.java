@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,9 +22,10 @@ public class GameActivity extends Activity {
 
     Button addScoreButton;
     EditText handP1EditText, handP2EditText;
-    TextView historyP1TextView, historyP2TextView;
+    TextView historyP1TextView, historyP2TextView, team1WinsTextView, team2WinsTextView;
+    ScrollView scoreScrollView;
 
-    protected int totalScoreP1 = 0, totalScoreP2 = 0, undoTotalScoreP1, undoTotalScoreP2;
+    protected int totalScoreP1 = 0, totalScoreP2 = 0, undoTotalScoreP1, undoTotalScoreP2, team1Wins = 0, team2Wins = 0;
     protected String scoreHistoryP1 = "", scoreHistoryP2 = "", undoScoreHistoryP1 = "", undoScoreHistoryP2 = "";
     protected String team1_player1, team1_player2, team2_player1, team2_player2;
 
@@ -38,6 +40,9 @@ public class GameActivity extends Activity {
         handP2EditText = (EditText) findViewById(R.id.hand_player_two);
         historyP1TextView = (TextView) findViewById(R.id.history_player_one);
         historyP2TextView = (TextView) findViewById(R.id.history_player_two);
+        team1WinsTextView = (TextView) findViewById(R.id.team1_wins_textview);
+        team2WinsTextView = (TextView) findViewById(R.id.team2_wins_textview);
+        scoreScrollView = (ScrollView) findViewById(R.id.scroll_scrollview);
 
         addScoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,9 +53,17 @@ public class GameActivity extends Activity {
                     emptyField.show();
                 } else {
                     addScoreToHistory();
+                    scoreScrollView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scoreScrollView.fullScroll(View.FOCUS_DOWN);
+                        }
+                    });
                 }
                 if (checkForWinner(totalScoreP1, totalScoreP2)) {
                     showWinnerDialog();
+                    team1WinsTextView.setText(String.valueOf(team1Wins));
+                    team2WinsTextView.setText(String.valueOf(team2Wins));
                 }
             }
         });
@@ -114,7 +127,15 @@ public class GameActivity extends Activity {
     }
 
     private boolean checkForWinner(int totalScoreP1, int totalScoreP2) {
-        return ((totalScoreP1 >= 151 || totalScoreP2 >= 151) && totalScoreP1 != totalScoreP2);
+        if ((totalScoreP1 >= 151 || totalScoreP2 >= 151) && totalScoreP1 != totalScoreP2) {
+            if (totalScoreP1 > totalScoreP2) {
+                team1Wins++;
+                return true;
+            } else {
+                team2Wins++;
+                return true;
+            }
+        } else return false;
     }
 
     private void showWinnerDialog() {
@@ -163,13 +184,6 @@ public class GameActivity extends Activity {
                 getSystemService(Context.INPUT_METHOD_SERVICE);
         inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                 InputMethodManager.HIDE_NOT_ALWAYS);
-    }
-
-    private void showKeyboard() {
-        InputMethodManager inputMethodManager = (InputMethodManager)
-                getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.showSoftInputFromInputMethod(getCurrentFocus().getWindowToken(),
-                InputMethodManager.SHOW_IMPLICIT);
     }
 
     protected int calculateTotalScore(int hand, int currentTotal) {
