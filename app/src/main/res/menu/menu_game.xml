@@ -4,7 +4,7 @@
     <item
         android:id="@+id/action_new_game"
         android:orderInCategory="50"
-        android:title="@string/action_new_game" />
+        android:title="@string/new_game" />
     <item
         android:id="@+id/action_undo"
         android:orderInCategory="70"

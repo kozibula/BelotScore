@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Belot Score</string>
+    <string name="new_game">Нова Игра</string>
+    <string name="button_add_score">Добави точки</string>
+    <string name="winner_message">Има победител!</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="action_about">Информация</string>
+    <string name="about_text">Направено от Наско Георгиев</string>
+    <string name="game_activity_title">Write Down</string>
+    <string name="settings">Настройки</string>
+    <string name="action_undo">Върни назад</string>
+    <string name="nie_text_view">Ние</string>
+    <string name="vie_text_view">Вие</string>
+    <string name="player1_hint">Играч 1</string>
+    <string name="player2_hint">Играч 2</string>
+    <string name="save_button">Запази</string>
+    <string name="settings_description">Тук може да въведете имената на играчите. Те ще се запазят за по-късно ползване.</string>
+    <string name="points_hint">Точки</string>
+    <string name="choose_language">Изберете език</string>
+
+
+</resources>

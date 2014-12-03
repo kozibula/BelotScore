@@ -143,7 +143,7 @@ public class GameActivity extends Activity {
         TextView winnerMessage = buildWinnerMessage();
         builder.setView(winnerMessage);
         builder.setCancelable(true);
-        builder.setPositiveButton(R.string.button_new_game,
+        builder.setPositiveButton(R.string.new_game,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         startNewGame();
