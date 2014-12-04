@@ -18,6 +18,7 @@
     <string name="save_button">Запази</string>
     <string name="settings_description">Тук може да въведете имената на играчите. Те ще се запазят за по-късно ползване.</string>
     <string name="points_hint">Точки</string>
+    <string name="empty_score_toast">Въведете точки и за двата отбора</string>
     <string name="choose_language">Изберете език</string>
 
 

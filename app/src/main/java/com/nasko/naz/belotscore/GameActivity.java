@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,7 +50,7 @@ public class GameActivity extends Activity {
             @Override
             public void onClick(View view) {
                 if (handP1EditText.getText().toString().matches("") || handP2EditText.getText().toString().matches("")) {
-                    Toast emptyField = Toast.makeText(getApplicationContext(), "You have to enter both scores", Toast.LENGTH_SHORT);
+                    Toast emptyField = Toast.makeText(getApplicationContext(), R.string.empty_score_toast, Toast.LENGTH_SHORT);
                     emptyField.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
                     emptyField.show();
                 } else {
@@ -63,7 +65,9 @@ public class GameActivity extends Activity {
                 if (checkForWinner(totalScoreP1, totalScoreP2)) {
                     showWinnerDialog();
                     team1WinsTextView.setText(String.valueOf(team1Wins));
+                    team1WinsTextView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
                     team2WinsTextView.setText(String.valueOf(team2Wins));
+                    team2WinsTextView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
                 }
             }
         });
