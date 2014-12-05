@@ -36,24 +36,18 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         getSharedPreferences();
-
-        addScoreButton = (Button) findViewById(R.id.add_score_button);
-        handP1EditText = (EditText) findViewById(R.id.hand_player_one);
-        handP2EditText = (EditText) findViewById(R.id.hand_player_two);
-        historyP1TextView = (TextView) findViewById(R.id.history_player_one);
-        historyP2TextView = (TextView) findViewById(R.id.history_player_two);
-        team1WinsTextView = (TextView) findViewById(R.id.team1_wins_textview);
-        team2WinsTextView = (TextView) findViewById(R.id.team2_wins_textview);
-        scoreScrollView = (ScrollView) findViewById(R.id.scroll_scrollview);
+        initializeViews();
 
         addScoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (handP1EditText.getText().toString().matches("") || handP2EditText.getText().toString().matches("")) {
+                if (handP1EditText.getText().toString().matches("") && handP2EditText.getText().toString().matches("")) {
                     Toast emptyField = Toast.makeText(getApplicationContext(), R.string.empty_score_toast, Toast.LENGTH_SHORT);
                     emptyField.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
                     emptyField.show();
-                } else {
+                }
+
+                else {
                     addScoreToHistory();
                     scoreScrollView.post(new Runnable() {
                         @Override
@@ -84,6 +78,17 @@ public class GameActivity extends Activity {
         });
     }
 
+    private void initializeViews() {
+        addScoreButton = (Button) findViewById(R.id.add_score_button);
+        handP1EditText = (EditText) findViewById(R.id.hand_player_one);
+        handP2EditText = (EditText) findViewById(R.id.hand_player_two);
+        historyP1TextView = (TextView) findViewById(R.id.history_player_one);
+        historyP2TextView = (TextView) findViewById(R.id.history_player_two);
+        team1WinsTextView = (TextView) findViewById(R.id.team1_wins_textview);
+        team2WinsTextView = (TextView) findViewById(R.id.team2_wins_textview);
+        scoreScrollView = (ScrollView) findViewById(R.id.scroll_scrollview);
+    }
+
     private void getSharedPreferences() {
         SharedPreferences playerNamesSave = getSharedPreferences(SettingsActivity.saveFileName, 0);
         team1_player1 = (playerNamesSave.getString("team1_player1", ""));
@@ -100,8 +105,12 @@ public class GameActivity extends Activity {
     }
 
     private void addScoreToHistory() {
-        int handP1 = Integer.parseInt(handP1EditText.getText().toString());
-        int handP2 = Integer.parseInt(handP2EditText.getText().toString());
+        int handP1 = 0;
+        int handP2 = 0;
+        if (!handP1EditText.getText().toString().matches(""))
+            handP1 = Integer.parseInt(handP1EditText.getText().toString());
+        if (!handP2EditText.getText().toString().matches(""))
+            handP2 = Integer.parseInt(handP2EditText.getText().toString());
         int newScoreP1 = calculateTotalScore(handP1, totalScoreP1);
         int newScoreP2 = calculateTotalScore(handP2, totalScoreP2);
 
