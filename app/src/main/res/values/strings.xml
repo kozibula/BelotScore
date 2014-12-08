@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Belot Score</string>
+    <string name="app_name">Belotе Score</string>
     <string name="new_game">New Game</string>
-    <string name="button_add_score">Add Scores</string>
+    <string name="button_add_score">Add Points</string>
     <string name="winner_message">There is a winner!</string>
     <string name="button_cancel">Cancel</string>
     <string name="action_about">About</string>
@@ -16,12 +16,15 @@
     <string name="player1_hint">Player 1</string>
     <string name="player2_hint">Player 2</string>
     <string name="save_button">Save</string>
-    <string name="settings_description">Here you can enter the names of the players. They will be saved for later use.</string>
+    <string name="settings_description">Enter your names:</string>
     <string name="points_hint">Points</string>
     <string name="empty_score_toast">You have to enter points for at least one team</string>
-    <string name="choose_language">Choose a language</string>
+    <string name="choose_language">Choose a language:</string>
     <string name="banner_ad_unit_id_production" translatable="false">ca-app-pub-9594507106413408/2131525174</string>
     <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="continue_button">Continue</string>
+    <string name="and_delimeter">" and "</string>
+    <string name="are_winners_delimeter">" are winners!"</string>
 
 
     <string-array name="languages">

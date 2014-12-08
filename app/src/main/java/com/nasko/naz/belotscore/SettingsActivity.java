@@ -2,6 +2,7 @@ package com.nasko.naz.belotscore;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -70,12 +71,15 @@ public class SettingsActivity extends FragmentActivity {
                 editor.apply();
 
                 Intent returnToMainIntent = new Intent(v.getContext(), MainActivity.class);
+                returnToMainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(returnToMainIntent);
             }
         });
     }
 
     private void initializeViews() {
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/inglobalb.ttf");
+
         team1_player1_editText = (EditText) findViewById(R.id.team1_player1_editText);
         team1_player2_editText = (EditText) findViewById(R.id.team1_player2_editText);
         team2_player1_editText = (EditText) findViewById(R.id.team2_player1_editText);
@@ -86,6 +90,16 @@ public class SettingsActivity extends FragmentActivity {
         weText = (TextView) findViewById(R.id.we_textview);
         youText = (TextView) findViewById(R.id.you_textview);
         languageDescription = (TextView) findViewById(R.id.choose_language_textview);
+
+        saveButton.setTypeface(tf);
+        team1_player1_editText.setTypeface(tf);
+        team1_player2_editText.setTypeface(tf);
+        team2_player1_editText.setTypeface(tf);
+        team2_player2_editText.setTypeface(tf);
+        settingsDescription.setTypeface(tf);
+        weText.setTypeface(tf);
+        youText.setTypeface(tf);
+        languageDescription.setTypeface(tf);
 
         playerNamesSave = getSharedPreferences(saveFileName, 0);
         team1_player1_editText.setText(playerNamesSave.getString("team1_player1", ""));
