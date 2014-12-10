@@ -3,10 +3,7 @@ package com.nasko.naz.belotscore;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
-
 import java.util.Locale;
-
 
 public class LanguageChanger {
 
@@ -46,6 +43,4 @@ public class LanguageChanger {
         String language = prefs.getString(langPref, "");
         changeLang(language, context);
     }
-
-
 }

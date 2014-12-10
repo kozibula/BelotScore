@@ -24,5 +24,9 @@
     <string name="and_delimeter">" и "</string>
     <string name="are_winners_delimeter">" са победители!"</string>
 
+    <string-array name="languages">
+        <item>English</item>
+        <item>Български</item>
+    </string-array>
 
 </resources>

@@ -24,21 +24,19 @@ public class GameActivity extends Activity {
 
     boolean newGame = true;
 
-    private Button addScoreButton;
-    private EditText handP1EditText, handP2EditText;
-    private TextView historyP1TextView, historyP2TextView, team1WinsTextView, team2WinsTextView;
-    private ScrollView scoreScrollView;
-
-    protected int totalScoreP1 = 0, totalScoreP2 = 0,
-            team1Wins = 0, team2Wins = 0, undoTotalScoreP1, undoTotalScoreP2;
-    protected String scoreHistoryP1 = "", scoreHistoryP2 = "",
-            undoScoreHistoryP1 = "", undoScoreHistoryP2 = "";
+    protected Button addScoreButton;
+    protected EditText handP1EditText, handP2EditText;
+    protected TextView historyP1TextView, historyP2TextView, team1WinsTextView, team2WinsTextView, nieTextView, vieTextView;
+    protected ScrollView scoreScrollView;
+    protected int totalScoreP1 = 0, totalScoreP2 = 0, team1Wins = 0, team2Wins = 0, undoTotalScoreP1, undoTotalScoreP2;
+    protected String scoreHistoryP1 = "", scoreHistoryP2 = "", undoScoreHistoryP1 = "", undoScoreHistoryP2 = "";
     protected String team1_player1, team1_player2, team2_player1, team2_player2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setBackgroundDrawableResource(R.drawable.test_bg3);
+        setTitle(R.string.game_activity_title);
         setContentView(R.layout.activity_game);
         getPreferences();
         initializeViews();
@@ -47,7 +45,6 @@ public class GameActivity extends Activity {
         if (!newGame) {
             continueGame();
         }
-
 
         addScoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +121,8 @@ public class GameActivity extends Activity {
         handP2EditText = (EditText) findViewById(R.id.hand_player_two);
         historyP1TextView = (TextView) findViewById(R.id.history_player_one);
         historyP2TextView = (TextView) findViewById(R.id.history_player_two);
+        nieTextView = (TextView) findViewById(R.id.nie_text_view);
+        vieTextView = (TextView) findViewById(R.id.vie_text_view);
         team1WinsTextView = (TextView) findViewById(R.id.team1_wins_textview);
         team1WinsTextView.setText(String.valueOf(team1Wins));
         team2WinsTextView = (TextView) findViewById(R.id.team2_wins_textview);
@@ -132,6 +131,8 @@ public class GameActivity extends Activity {
         tf = Typeface.createFromAsset(getAssets(), "fonts/inglobalb.ttf");
         historyP1TextView.setTypeface(tf);
         historyP2TextView.setTypeface(tf);
+        nieTextView.setTypeface(tf);
+        vieTextView.setTypeface(tf);
         team1WinsTextView.setTypeface(tf);
         team2WinsTextView.setTypeface(tf);
         handP1EditText.setTypeface(tf);
@@ -166,7 +167,6 @@ public class GameActivity extends Activity {
         int newScoreP2 = calculateTotalScore(handP2, totalScoreP2);
 
         saveBackUp();
-
         StringBuffer historyP1 = new StringBuffer(), historyP2 = new StringBuffer();
 
         if (scoreHistoryP1.matches("") && scoreHistoryP2.matches("")) {
@@ -179,10 +179,8 @@ public class GameActivity extends Activity {
 
         scoreHistoryP1 = String.valueOf(historyP1);
         scoreHistoryP2 = String.valueOf(historyP2);
-
         historyP1TextView.setText(scoreHistoryP1);
         historyP2TextView.setText(scoreHistoryP2);
-
         totalScoreP1 = newScoreP1;
         totalScoreP2 = newScoreP2;
         handP1EditText.setText("");
@@ -291,10 +289,6 @@ public class GameActivity extends Activity {
         }
         if (id == R.id.action_undo) {
             undoMove();
-        }
-        if (id == R.id.action_about) {
-            Toast aboutToast = Toast.makeText(this, getString(R.string.about_text), Toast.LENGTH_LONG);
-            aboutToast.show();
         }
         return super.onOptionsItemSelected(item);
     }

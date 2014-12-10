@@ -1,16 +1,13 @@
 package com.nasko.naz.belotscore;
 
-
 import android.content.Context;
 import android.content.SharedPreferences;
-
 
 public class SavingData {
     public static String saveFileName = "PlayerHistorySave";
     private static String scoreHistoryP1 = "", scoreHistoryP2 = "";
     private static int winsP1 = 0, winsP2 = 0, scoreP1 = 0, scoreP2 = 0;
     private static SharedPreferences playerHistorySave;
-
 
     public static void setScoreP1(int newScoreP1) {
         scoreP1 = newScoreP1;
@@ -59,7 +56,6 @@ public class SavingData {
     public static void setWinsP2(int newWinsP2) {
         winsP2 = newWinsP2;
     }
-
 
     public static void saveData(Context context, String scoreHistoryP1, String scoreHistoryP2, int winsP1, int winsP2, int scoreP1, int scoreP2) {
         playerHistorySave = context.getSharedPreferences(saveFileName, 0);

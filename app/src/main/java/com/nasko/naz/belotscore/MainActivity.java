@@ -1,8 +1,6 @@
 package com.nasko.naz.belotscore;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -10,18 +8,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.Locale;
-
 public class MainActivity extends FragmentActivity {
 
-    Button newGameButton, continueButton, settingsButton;
-    TextView applicationName;
+    protected Button newGameButton, continueButton, settingsButton;
+    protected TextView applicationName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         LanguageChanger.loadLocale(getBaseContext());
 
         applicationName = (TextView) findViewById(R.id.app_name_text);
@@ -38,7 +33,6 @@ public class MainActivity extends FragmentActivity {
         settingsButton = (Button) findViewById(R.id.settings_button_main);
         settingsButton.setText(R.string.settings);
         settingsButton.setTypeface(tf);
-
 
         newGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,8 +62,4 @@ public class MainActivity extends FragmentActivity {
             }
         });
     }
-
-
 }
-
-
